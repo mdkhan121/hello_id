@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello Yo ID</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    div{
+      width: 60%;
+      margin: auto;
+      padding: 10px;
+    }
+    h1{
+      text-align: center;
+    }
+    li{
+      list-style: none;
+      margin: 5px;
+    }
+    span{
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Hello Yo ID</h1><hr>
+    <ul id="phoneList">
+    </ul>
+  </div>
+
+  <script>
+    function copyPhoneNumber(phoneNumber, listItem) {
+      var tempInput = document.createElement("input");
+      tempInput.value = phoneNumber;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      
+      var copiedSpan = document.createElement("span");
+      copiedSpan.textContent = " Copied!";
+      copiedSpan.style.color = "green";
+      listItem.appendChild(copiedSpan);
+      
+      setTimeout(function() {
+        listItem.removeChild(copiedSpan);
+      }, 1000);
+    }
+
+    function createPhoneNumberListItem(serialNumber, phoneNumber) {
+      var listItem = document.createElement("li");
+      listItem.textContent = serialNumber + ". " + phoneNumber;
+      listItem.style.cursor = "pointer";
+      listItem.addEventListener("click", function() {
+        copyPhoneNumber(phoneNumber, listItem);
+      });
+      return listItem;
+    }
+
+    var phoneNumbers = ["1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "1234567890", "4567891230", "7891234560"];
+
+    var phoneList = document.getElementById("phoneList");
+    phoneNumbers.forEach(function(phoneNumber, index) {
+      var listItem = createPhoneNumberListItem(index + 1, phoneNumber);
+      phoneList.appendChild(listItem);
+    });
+  </script>
+</body>
+</html>
